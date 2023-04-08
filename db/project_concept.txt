@@ -1,0 +1,19 @@
+
+edit data, search, exit
+
+edit will prompt a dropdown menu of which table we want to manipulate
+
+have the option to insert, delete, and edit an entry
+
+search will have an entry box, dropdown list, and a search Button
+enter a value in the entry box
+
+dropdown list will include the following:
+search by case number
+search by lawyer id 
+search by client id 
+search by court id 
+search by ssn 
+search by location location of case court
+
+
