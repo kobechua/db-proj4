@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const db = require("./db");
 
 const app = express();
 
@@ -8,7 +9,9 @@ app.use(express.json());
 
 //show all lawyers
 app.get("/api/ver1/lawyer", (req, res) => {
-    res.json({
+
+    db.query("SELECT * FROM LAWYERS;")
+    res.status(200).json({
         status: "success",
         data: {
             lawyer: ["John Smith", "Jane Doe"]
