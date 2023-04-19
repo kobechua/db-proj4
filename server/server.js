@@ -1,9 +1,11 @@
 require("dotenv").config();
 const express = require("express");
-const morgan = require("morgan");
+const cors = require("cors");
 const db = require("./db");
 
 const app = express();
+
+app.use(cors())
 
 app.use(express.json());
 
@@ -13,7 +15,7 @@ app.use(express.json());
 app.get("/api/ver1/lawyer", async (req, res) => {
     try{
         const qresult = await db.query("select * from lawyer");
-        console.log(qresult);
+        // console.log(qresult);
         res.status(200).json({
             status: "success",
             results: qresult.rows.length,
@@ -31,7 +33,7 @@ app.get("/api/ver1/lawyer", async (req, res) => {
 
 //get a lawyer
 app.get("/api/ver1/lawyer/:id", async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     
     try{
         const qresult = await db.query(`select * from lawyer where l_lawyerid = $1`, [req.params.id])
@@ -52,7 +54,7 @@ app.get("/api/ver1/lawyer/:id", async (req, res) => {
 app.post("/api/ver1/lawyer", async (req, res) => {
     try {
         const qresult = await db.query("insert into lawyer (l_firstname, l_lastname, l_lawyerid, l_phonenumber, l_address, l_dob, l_ssn, l_description) values ($1,$2,$3,$4,$5,$6,$7,$8) returning *", [req.body.l_firstname, req.body.l_lastname, req.body.l_lawyerid, req.body.l_phonenumber, req.body.l_address, req.body.l_dob, req.body.l_ssn, req.body.l_description])
-        console.log(qresult);
+        // console.log(qresult);
         res.status(200).json({
             status : "success",
             data : {
@@ -71,8 +73,8 @@ app.put("/api/ver1/lawyer/:id", async (req, res) => {
 
     try{
         const qresult = await db.query("update lawyer set l_firstname = $1, l_lastname = $2, l_phonenumber = $4, l_address = $5, l_dob = $6, l_ssn = $7, l_description = $8 where l_lawyerid = $3", [req.body.l_firstname, req.body.l_lastname, req.body.l_lawyerid, req.body.l_phonenumber, req.body.l_address, req.body.l_dob, req.body.l_ssn, req.body.l_description])
-        console.log(req.params.id);
-        console.log(qresult);
+        // console.log(req.params.id);
+        // console.log(qresult);
         res.status(200).json({
         status : "success",
             data : {
@@ -107,7 +109,7 @@ app.delete("/api/ver1/lawyer/:id", async (req,res) => {
 app.get("/api/ver1/client", async (req, res) => {
     try{
         const qresult = await db.query("select * from client");
-        console.log(qresult);
+        // console.log(qresult);
         res.status(200).json({
             status: "success",
             results: qresult.rows.length,
@@ -125,7 +127,7 @@ app.get("/api/ver1/client", async (req, res) => {
 
 //get a client
 app.get("/api/ver1/client/:id", async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     
     try{
         const qresult = await db.query(`select * from client where cl_clientid = $1`, [req.params.id])
@@ -146,7 +148,7 @@ app.get("/api/ver1/client/:id", async (req, res) => {
 app.post("/api/ver1/client", async (req, res) => {
     try {
         const qresult = await db.query("insert into client (cl_firstname, cl_lastname, cl_clientid, cl_phonenumber, cl_address, cl_dob, cl_ssn, cl_description) values ($1,$2,$3,$4,$5,$6,$7,$8) returning *", [req.body.cl_firstname, req.body.cl_lastname, req.body.cl_clientid, req.body.cl_phonenumber, req.body.cl_address, req.body.cl_dob, req.body.cl_ssn, req.body.cl_description])
-        console.log(qresult);
+        // console.log(qresult);
         res.status(200).json({
             status : "success",
             data : {
@@ -165,8 +167,8 @@ app.put("/api/ver1/client/:id", async (req, res) => {
 
     try{
         const qresult = await db.query("update client set cl_firstname = $1, cl_lastname = $2, cl_phonenumber = $4, cl_address = $5, cl_dob = $6, cl_ssn = $7, cl_description = $8 where cl_clientid = $3", [req.body.cl_firstname, req.body.cl_lastname, req.body.cl_clientid, req.body.cl_phonenumber, req.body.cl_address, req.body.cl_dob, req.body.cl_ssn, req.body.cl_description])
-        console.log(req.params.id);
-        console.log(qresult);
+        // console.log(req.params.id);
+        // console.log(qresult);
         res.status(200).json({
         status : "success",
             data : {
