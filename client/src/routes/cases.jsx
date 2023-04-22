@@ -1,23 +1,22 @@
 import React from 'react'
 import Header from "../components/Header"
-import AddLawyer from "../components/addLawyer"
-import LawyerList from '../components/lawyerList';
+import AddCases from "../components/addCases"
+import CasesList from '../components/casesList';
 import Navbar from '../components/navbar'
 
-
-const lawyer = () => {
+const cases = () => {
   return (
     <div>
         <Navbar />
         <div className='container'>
         <h1 className="font-weight-light display-1 text-center">
-            Lawyers
+            Cases
         </h1>
     </div>
-        <AddLawyer/>
-        <LawyerList/>
+        <AddCases/>
+        <CasesList/>
     </div>
   )
 }
 
-export default lawyer
+export default cases

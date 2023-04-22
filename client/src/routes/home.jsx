@@ -1,16 +1,15 @@
 import React from 'react'
-import Header from "../components/Header"
-import AddLawyer from "../components/addLawyer"
-import LawyerList from '../components/lawyerList';
+import { Link } from 'react-router-dom'
+import Navbar from '../components/navbar'
+import { Login } from '../components/Login'
+import '../app.css'
 
 const home = () => {
-  return (
+  return ( 
     <div>
-        <Header />
-        <AddLawyer/>
-        <LawyerList/>
+    <Login/>
     </div>
   )
 };
 
-export default home;
+export default home; 

@@ -1,17 +1,17 @@
 import React, {useContext, useEffect} from 'react'
-import lawyerapi from '../api/lawyerapi'
+import clientapi from '../api/clientapi'
 import { lawyercontext } from '../context/lawyercontext'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 
-const LawyerList = () => {
-    const {lawyers, setlawyers} = useContext(lawyercontext)
+const ClientList = () => {
+    const {clients, setclients} = useContext(lawyercontext)
     let history = useHistory()
         useEffect(() => {
             const fetchData = async () => {
                 try{
-                    const response = await lawyerapi.get("/")
-                    setlawyers(response.data.data.lawyer)
+                    const response = await clientapi.get("/")
+                    setclients(response.data.data.client)
                 } catch (err) {
                     console.log(err)
                 }
@@ -21,9 +21,9 @@ const LawyerList = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await lawyerapi.delete(`/${id}`)
-            setlawyers(lawyers.filter(lawyer => {
-                return lawyer.l_lawyerid !== id
+            const response = await clientapi.delete(`/${id}`)
+            setclients(clients.filter(client => {
+                return client.cl_clientid !== id
             }))
             console.log(response)
         } catch (err) {
@@ -32,7 +32,7 @@ const LawyerList = () => {
     }
 
     const handleUpdate = (id) => {
-        history.push(`/lawyer/${id}/update`)
+        history.push(`/client/${id}/update`)
     }
         
     return (
@@ -42,7 +42,7 @@ const LawyerList = () => {
                 <tr className="">
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Lawyer ID</th>
+                    <th scope="col">Client ID</th>
                     <th scope="col">Phone #</th>
                     <th scope="col">Address</th>
                     <th scope="col">DOB</th>
@@ -55,21 +55,21 @@ const LawyerList = () => {
             </thead>
             <tbody>
 
-                {lawyers.map(lawyer => {
-                    return (   <tr key= {lawyer.l_lawyerid}>
-                            <td>{lawyer.l_firstname}</td>
-                            <td>{lawyer.l_lastname}</td>
-                            <td>{lawyer.l_lawyerid}</td>
-                            <td>{lawyer.l_phonenumber}</td>
-                            <td>{lawyer.l_address}</td>
-                            <td>{lawyer.l_dob}</td>
-                            <td>{lawyer.l_ssn}</td>
-                            <td>{lawyer.l_description}</td>
+                {clients.map(client => {
+                    return (   <tr key= {client.cl_clientid}>
+                            <td>{client.cl_firstname}</td>
+                            <td>{client.cl_lastname}</td>
+                            <td>{client.cl_clientid}</td>
+                            <td>{client.cl_phonenumber}</td>
+                            <td>{client.cl_address}</td>
+                            <td>{client.cl_dob}</td>
+                            <td>{client.cl_ssn}</td>
+                            <td>{client.cl_description}</td>
                             <td>
-                                <button onClick = {() => handleUpdate(lawyer.l_lawyerid)} className="btn btn-warning">Edit</button>
+                                <button onClick = {() => handleUpdate(client.cl_clientid)} className="btn btn-warning">Edit</button>
                             </td>
                             <td>
-                                <button onClick = {() => handleDelete(lawyer.l_lawyerid)} className="btn btn-danger">Delete</button>
+                                <button onClick = {() => handleDelete(client.cl_clientid)} className="btn btn-danger">Delete</button>
                             </td>
 
                             </tr>
@@ -81,4 +81,4 @@ const LawyerList = () => {
   )
 }
 
-export default LawyerList
+export default ClientList

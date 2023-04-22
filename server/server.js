@@ -14,7 +14,7 @@ app.use(express.json());
 //show all lawyers
 app.get("/api/ver1/lawyer", async (req, res) => {
     try{
-        const qresult = await db.query("select * from lawyer");
+        const qresult = await db.query("select * from lawyer order by l_lawyerid");
         // console.log(qresult);
         res.status(200).json({
             status: "success",
@@ -108,7 +108,7 @@ app.delete("/api/ver1/lawyer/:id", async (req,res) => {
 //show all client
 app.get("/api/ver1/client", async (req, res) => {
     try{
-        const qresult = await db.query("select * from client");
+        const qresult = await db.query("select * from client order by cl_clientid");
         // console.log(qresult);
         res.status(200).json({
             status: "success",
@@ -201,7 +201,7 @@ app.delete("/api/ver1/client/:id", async (req,res) => {
 //select all cases
 app.get("/api/ver1/cases", async (req, res) => {
     try{
-        const qresult = await db.query("select * from cases");
+        const qresult = await db.query("select * from cases order by cs_casenumber");
         console.log(qresult);
         res.status(200).json({
             status: "success",
@@ -294,7 +294,7 @@ app.delete("/api/ver1/cases/:id", async (req,res) => {
 //select all court
 app.get("/api/ver1/court", async (req, res) => {
     try{
-        const qresult = await db.query("select * from court");
+        const qresult = await db.query("select * from court order by court");
         console.log(qresult);
         res.status(200).json({
             status: "success",

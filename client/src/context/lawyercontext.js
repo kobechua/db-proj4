@@ -10,8 +10,26 @@ export const LawyerContextProvider = props => {
         setlawyers([...lawyers, lawyer])
     }
 
+    const [clients, setclients] = useState([])
+
+    const addclient = (client) => {
+        setclients([...clients, client])
+    }
+    
+    const [cases, setcases] = useState([])
+
+    const addcase = (cse) => {
+        setcases([...cases, cse])
+
+    }
+
+    const [courts, setcourts] = useState([])
+
+    const addcourts = (court) => {
+        setcourts([...courts, court])
+    }
     return(
-            <lawyercontext.Provider value={{lawyers, setlawyers, addlawyer}}>
+            <lawyercontext.Provider value={{lawyers, setlawyers, addlawyer,clients, setclients, addclient, cases, setcases, addcase, courts, setcourts, addcourts}}>
                 {props.children}
             </lawyercontext.Provider>
     )

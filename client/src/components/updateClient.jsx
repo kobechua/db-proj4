@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { lawyercontext } from '../context/lawyercontext';
-import lawyerapi from '../api/lawyerapi';
+import clientapi from '../api/clientapi';
 
-const UpdateLawyer = (props) => {
+const UpdateClient = (props) => {
 
     const {id} = useParams();
     let history = useHistory()
-    const {lawyer} = useContext(lawyercontext)
+    const {client} = useContext(lawyercontext)
 
     const [fname, setfname] = useState("")
     const [lname, setlname] = useState("")
-    const [lid, setlid] = useState("")
+    const [cid, setcid] = useState("")
     const [pnum, setpnum] = useState("")
     const [addr, setaddr] = useState("")
     const  [dob, setdob] = useState("")
@@ -20,16 +20,16 @@ const UpdateLawyer = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await lawyerapi.get(`/${id}`)
+            const response = await clientapi.get(`/${id}`)
             console.log(response.data.data)
-            setfname(response.data.data.lawyer.l_firstname)
-            setlname(response.data.data.lawyer.l_lastname)
-            setlid(response.data.data.lawyer.l_lawyerid)
-            setaddr(response.data.data.lawyer.l_address)
-            setpnum(response.data.data.lawyer.l_phonenumber)
-            setdob(response.data.data.lawyer.l_dob)
-            setssn(response.data.data.lawyer.l_ssn)
-            setdesc(response.data.data.lawyer.l_description)
+            setfname(response.data.data.client.cl_firstname)
+            setlname(response.data.data.client.cl_lastname)
+            setcid(response.data.data.client.cl_clientid)
+            setaddr(response.data.data.client.cl_address)
+            setpnum(response.data.data.client.cl_phonenumber)
+            setdob(response.data.data.client.cl_dob)
+            setssn(response.data.data.client.cl_ssn)
+            setdesc(response.data.data.client.cl_description)
 
         }
 
@@ -38,17 +38,17 @@ const UpdateLawyer = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const updatedLawyer = await lawyerapi.put(`/${id}`, {
-            l_firstname : fname,
-            l_lastname : lname,
-            l_lawyerid : lid,
-            l_phonenumber : pnum,
-            l_address : addr,
-            l_dob : dob,
-            l_ssn : ssn,
-            l_description : desc
+        const updatedClient = await clientapi.put(`/${id}`, {
+            cl_firstname : fname,
+            cl_lastname : lname,
+            cl_clientid : cid,
+            cl_phonenumber : pnum,
+            cl_address : addr,
+            cl_dob : dob,
+            cl_ssn : ssn,
+            cl_description : desc
         })
-        history.push("/lawyer")
+        history.push("/client")
     }
     
     return (
@@ -64,8 +64,8 @@ const UpdateLawyer = (props) => {
                 <input value={lname} onChange = {e => setlname(e.target.value)} id="lname" className="form-control" type="text" />
             </div>
             <div className='form-group'>
-                <label htmlFor="lid">Lawyer ID</label>
-                <input value={lid} onChange = {e => setlid(e.target.value)} input id="lid" className="form-control" type="number" />
+                <label htmlFor="cid">Client ID</label>
+                <input value={cid} onChange = {e => setcid(e.target.value)} input id="cid" className="form-control" type="number" />
             </div>
             <div className='form-group'>
                 <label htmlFor="pnum">Phone #</label>
@@ -93,4 +93,4 @@ const UpdateLawyer = (props) => {
   )
 }
 
-export default UpdateLawyer
+export default UpdateClient

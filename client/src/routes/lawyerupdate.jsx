@@ -3,7 +3,7 @@ import UpdateLawyer from '../components/updateLawyer'
 
 const lawyerupdate = () => {
   return (
-    <div>
+    <div className="container">
         <h1 className="text-center">Update Lawyer</h1>
         <UpdateLawyer></UpdateLawyer>
     </div>

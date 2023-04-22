@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
-import lawyerapi from '../api/lawyerapi'
+import clientapi from '../api/clientapi'
 import { lawyercontext } from '../context/lawyercontext'
 
-const AddLawyer = () => {
-    const {addLawyer} = useContext(lawyercontext);
+const AddClient = () => {
+    const {addClient} = useContext(lawyercontext);
 
     const [fname, setfname] = useState("")
     const [lname, setlname] = useState("")
-    const [lid, setlid] = useState("")
+    const [cid, setcid] = useState("")
     const [pnum, setpnum] = useState("")
     const [addr, setaddr] = useState("")
     const  [dob, setdob] = useState("")
@@ -17,18 +17,18 @@ const AddLawyer = () => {
     const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-        const response = await lawyerapi.post("/", {
-            l_firstname : fname,
-            l_lastname : lname,
-            l_lawyerid : lid,
-            l_phonenumber : pnum,
-            l_address : addr,
-            l_dob : dob,
-            l_ssn : ssn,
-            l_description : desc
+        const response = await clientapi.post("/", {
+            cl_firstname : fname,
+            cl_lastname : lname,
+            cl_clientid : cid,
+            cl_phonenumber : pnum,
+            cl_address : addr,
+            cl_dob : dob,
+            cl_ssn : ssn,
+            cl_description : desc
 
         })
-        addLawyer(response.data.data.lawyer)
+        addClient(response.data.data.client)
         console.log(response)
     } catch (err){
 
@@ -46,7 +46,7 @@ const AddLawyer = () => {
                         <input values = {lname} onChange={e => setlname(e.target.value)} className="form-control" type="text" placeholder="Last Name"/>
                     </div>
                     <div className="col">
-                        <input values = {lid} onChange={e => setlid(e.target.value)} className="form-control" type="text" placeholder="Lawyer ID"/>
+                        <input values = {cid} onChange={e => setcid(e.target.value)} className="form-control" type="text" placeholder="Client ID"/>
                     </div>
                     <div className="col">
                         <input values = {pnum} onChange={e => setpnum(e.target.value)} type="text" className="form-control" placeholder="Phone Number"/>                        
@@ -73,4 +73,4 @@ const AddLawyer = () => {
   )
 }
 
-export default AddLawyer
+export default AddClient
