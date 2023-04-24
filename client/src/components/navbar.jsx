@@ -27,16 +27,7 @@ const navbar = () => {
                     </li>
                 </ul>
             </div>
-            <div className="float-end">
-                <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a href="#" className='nav-link'>Sign Up</a>
-                    </li>
-                    <li className="nav-item active">
-                        <a href="#" className='nav-link active'>Log Out</a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </nav>
     )

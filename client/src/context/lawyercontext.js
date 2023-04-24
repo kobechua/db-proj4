@@ -28,6 +28,7 @@ export const LawyerContextProvider = props => {
     const addcourts = (court) => {
         setcourts([...courts, court])
     }
+
     return(
             <lawyercontext.Provider value={{lawyers, setlawyers, addlawyer,clients, setclients, addclient, cases, setcases, addcase, courts, setcourts, addcourts}}>
                 {props.children}
