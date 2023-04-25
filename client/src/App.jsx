@@ -11,17 +11,18 @@ import cases from './routes/cases';
 import casesupdate from './routes/casesupdate';
 import court from './routes/court';
 import courtupdate from './routes/courtupdate';
-
-
+import login from './routes/login'
 
 
 const App = () => {
+
     return (
         <LawyerContextProvider>
             <div>
                 <Router>
                     <Switch> 
                         <Route exact path ="/" component = {home}/>
+                        <Route exact path ="/login" component = {login}/>
                         <Route exact path = "/lawyer" component ={lawyer}/>
                         <Route exact path ="/lawyer/:id/update" component = {lawyerupdate}/>
                         <Route exact path = "/client" component ={client}/>

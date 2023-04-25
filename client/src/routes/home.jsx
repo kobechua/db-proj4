@@ -1,15 +1,19 @@
 import React from 'react'
 
-import Navbar from '../components/navbar'
 import Homec from '../components/homec'
-import '../app.css'
+import LogoutButton from '../components/LogoutButton'
 
 const home = () => {
   return ( 
-    <div>
-    <Homec />
-    
+    <div className="container-xl">
+      <div className="d-flex justify-content-end">
+        <div className="col-lg-6">
+          <Homec />
+          <LogoutButton />
+        </div>
+      </div>
     </div>
+    
   )
 };
 

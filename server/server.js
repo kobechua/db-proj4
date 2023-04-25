@@ -9,6 +9,13 @@ app.use(cors())
 
 app.use(express.json());
 
+
+app.use('/login', (req, res) => {
+    res.send({
+        token : 'password'
+    })
+})
+
 //LAWYER OPERATIONS
 
 //show all lawyers
@@ -241,7 +248,7 @@ app.get("/api/ver1/cases/:id", async (req, res) => {
 app.post("/api/ver1/cases", async (req, res) => {
     try {
         const qresult = await db.query("insert into cases (cs_lawyerid, cs_clientid, cs_casenumber, cs_courtid, cs_date, cs_description) values ($1,$2,$3,$4,$5,$6) returning *", [req.body.cs_lawyerid, req.body.cs_clientid, req.body.cs_casenumber, req.body.cs_courtid, req.body.cs_date, req.body.cs_description])
-        console.log(qresult);
+        
         res.status(200).json({
             status : "success",
             data : {
@@ -295,7 +302,7 @@ app.delete("/api/ver1/cases/:id", async (req,res) => {
 app.get("/api/ver1/court", async (req, res) => {
     try{
         const qresult = await db.query("select * from court order by court");
-        console.log(qresult);
+        
         res.status(200).json({
             status: "success",
             results: qresult.rows.length,
@@ -385,6 +392,7 @@ app.delete("/api/ver1/court/:id", async (req,res) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
+    app.get('/login');
     console.log(`Server listening on port ${port}`);
 });
 
